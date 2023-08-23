@@ -6,7 +6,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
-#include <ctype.h>
+#include <ctype>
+#include <sys/types.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -38,6 +44,8 @@ typedef struct bus_s
 	int lifi;
 }  bus_t;
 extern bus_t bus;
+=======
+
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -75,4 +83,29 @@ void addnode(stack_t **head, int n);
 void addqueue(stack_t **head, int n);
 void f_queue(stack_t **head, unsigned int counter);
 void f_stack(stack_t **head, unsigned int counter);
+#endif
+
+/**
+ * struct global - Use in many files
+ * @num: Stack numbers.
+ * @buff: Buffer.
+ * @file: File to open.
+ */
+typedef struct global
+{
+	char *num;
+	char *buff;
+	FILE *file;
+} global;
+extern global gl;
+
+void op_cmd(stack_t **h, unsigned int cnt, char *cmd);
+void _push(stack_t **h,  unsigned int cnt);
+void ultrafree(stack_t *h);
+void _pall(stack_t **h, unsigned int cnt);
+void _pint(stack_t **ptr, unsigned int cnt);
+void _pop(stack_t **ptr, unsigned int cnt);
+void _swap(stack_t **ptr, unsigned int cnt);
+void _add(stack_t **ptr, unsigned int cnt);
+void _nop(stack_t **ptr, unsigned int cnt);
 #endif
